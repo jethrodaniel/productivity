@@ -15,7 +15,7 @@ export default class InputPage extends React.Component {
         <NumberInput field={'Rate'}/>
         <Button
           onPress={this.props.onPress}
-          title="Press Me"
+          title='Calculate'
         />
       </View>
     );
