@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-import HourInput from './components/HourInput';
+import NumberInput from './components/NumberInput';
 
 const Header = (props) => (
   <View>
@@ -22,9 +22,9 @@ export default class App extends React.Component {
     return (
       <View style={styles.app}>
         <Header msg={'Enter scheduled time'}/>
-        <HourInput/>
-        <HourInput/>
-        <HourInput/>
+        <NumberInput field={'Hours'}/>
+        <NumberInput field={'Minutes'}/>
+        <NumberInput field={'Rate'}/>
       </View>
     );
   }

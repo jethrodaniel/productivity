@@ -1,13 +1,12 @@
-import React, { Component, Button } from 'react';
+import React, { Button } from 'react';
 
 import {
   StyleSheet,
-  Text,
   TextInput,
   View
 } from 'react-native';
 
-export default class HourInput extends Component {
+export default class NumberInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: '' };
@@ -18,9 +17,9 @@ export default class HourInput extends Component {
       <View>
         <TextInput
           style={styles.container}
-          onChangeText={ (text) => { this.setState({text})} }
+          onChangeText={ (text) => { this.setState({text}) }}
           value={this.state.text}
-          placeholder="Hours"
+          placeholder={this.props.field}
           keyboardType="numeric"
           returnKeyType="next"
         />
@@ -31,11 +30,11 @@ export default class HourInput extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 160,
-    height: 62,
     borderColor: 'gray',
     borderWidth: 1,
     color: 'white',
-    fontSize: 26
+    fontSize: 26,
+    height: 62,
+    width: 160
   }
 });
