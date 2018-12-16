@@ -2,7 +2,10 @@ import React from 'react';
 
 import { StyleSheet } from 'react-native';
 
+import Header from './components/Header';
+import NumberInput from './components/NumberInput';
 import InputPage from './components/InputPage';
+import ResultPage from './components/ResultPage';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,25 +16,26 @@ export default class App extends React.Component {
     };
   }
 
-  onPress = () => {
-    this.setState({submitted: !this.state.submitted});
+  submit = () => {
+    this.setState({submitted: true});
+    console.log(`Pressed! ${this.state.submitted}`);
+  }
+
+  goBack = () => {
+    this.setState({submitted: false});
     console.log(`Pressed! ${this.state.submitted}`);
   }
 
   render() {
     if (this.state.submitted) {
-      return null;
+      return <ResultPage styles={styles} onPress={this.goBack}/>;
     } else {
-      return <InputPage onPress={this.onPress}/>;
+      return <InputPage styles={styles} onPress={this.submit}/>;
     }
   }
 }
 
 const styles = StyleSheet.create({
-  header: {
-    color: 'white',
-    fontSize: 32
-  },
   app: {
     alignItems: 'center',
     backgroundColor: '#282923',
