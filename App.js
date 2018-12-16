@@ -7,23 +7,28 @@ import NumberInput from './components/NumberInput';
 import InputPage from './components/InputPage';
 import ResultPage from './components/ResultPage';
 
+// Top-most component
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      submitted: false
-    };
+    this.state = { submitted: false };
   }
 
+  // Logs a button press to the console
+  logPress = () => {
+    console.log(`Pressed a button! submitted: ${this.state.submitted}`);
+  }
+
+  // Submits the input page
   submit = () => {
+    this.logPress();
     this.setState({submitted: true});
-    console.log(`Pressed! ${this.state.submitted}`);
   }
 
+  // Returns to the input page
   goBack = () => {
+    this.logPress();
     this.setState({submitted: false});
-    console.log(`Pressed! ${this.state.submitted}`);
   }
 
   render() {
