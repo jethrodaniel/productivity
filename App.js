@@ -1,32 +1,29 @@
-import React, { Button } from 'react';
+import React from 'react';
 
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View
-} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import NumberInput from './components/NumberInput';
-
-const Header = (props) => (
-  <View>
-    <Text style={styles.header}>
-     {props.msg}
-    </Text>
-  </View>
-);
+import InputPage from './components/InputPage';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      submitted: false
+    };
+  }
+
+  onPress = () => {
+    this.setState({submitted: !this.state.submitted});
+    console.log(`Pressed! ${this.state.submitted}`);
+  }
+
   render() {
-    return (
-      <View style={styles.app}>
-        <Header msg={'Enter scheduled time'}/>
-        <NumberInput field={'Hours'}/>
-        <NumberInput field={'Minutes'}/>
-        <NumberInput field={'Rate'}/>
-      </View>
-    );
+    if (this.state.submitted) {
+      return null;
+    } else {
+      return <InputPage onPress={this.onPress}/>;
+    }
   }
 }
 
