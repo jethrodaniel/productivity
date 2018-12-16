@@ -1,4 +1,4 @@
-import React, { Component, Button } from 'react';
+import React, { Button } from 'react';
 
 import {
   StyleSheet,
@@ -9,45 +9,38 @@ import {
 
 import HourInput from './components/HourInput';
 
-// const Header = (props) => (
-//   <Text style={styles.header}>{props.message}</Text>
-// );
+const Header = (props) => (
+  <View>
+    <Text style={styles.header}>
+     {props.msg}
+    </Text>
+  </View>
+);
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.app}>
-
-        <View>
-          <Text style={{color: 'white', fontSize: 32}}>
-            Enter scheduled time
-          </Text>
-        </View>
-
+        <Header msg={'Enter scheduled time'}/>
         <HourInput/>
         <HourInput/>
         <HourInput/>
-
-        </View >
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  header: {
+    color: 'white',
+    fontSize: 32
+  },
   app: {
     alignItems: 'center',
+    backgroundColor: '#282923',
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-around',
-    flex: 1,
-    backgroundColor: '#282923',
     paddingTop: 10
-  },
-  header: {
-    marginTop: 64,
-    color: 'white',
-    fontSize: 64,
-    fontWeight: 'bold',
-    flex: 3,
-    backgroundColor: 'yellow'
   }
 });
