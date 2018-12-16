@@ -1,10 +1,6 @@
 import React, { Button } from 'react';
 
-import {
-  StyleSheet,
-  TextInput,
-  View
-} from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 
 export default class NumberInput extends React.Component {
   constructor(props) {
@@ -17,7 +13,7 @@ export default class NumberInput extends React.Component {
       <View>
         <TextInput
           style={styles.container}
-          onChangeText={ (text) => { this.setState({text}) }}
+          onChangeText={(text) => { this.setState({text}) }}
           value={this.state.text}
           placeholder={this.props.field}
           keyboardType="numeric"
