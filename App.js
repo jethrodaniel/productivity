@@ -32,10 +32,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.submitted) {
-      return <ResultPage styles={styles} onPress={this.goBack}/>;
-    } else {
+    if (!this.state.submitted) {
       return <InputPage styles={styles} onPress={this.submit}/>;
+    } else {
+      return <ResultPage styles={styles} onPress={this.goBack}/>;
     }
   }
 }
