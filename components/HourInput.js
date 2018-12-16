@@ -17,7 +17,7 @@ export default class HourInput extends Component {
     return (
       <View>
         <TextInput
-          style={{width: 160, height: 62, borderColor: 'gray', borderWidth: 1, color: 'white', fontSize: 26}}
+          style={styles.container}
           onChangeText={ (text) => { this.setState({text})} }
           value={this.state.text}
           placeholder="Hours"
@@ -28,3 +28,14 @@ export default class HourInput extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: 160,
+    height: 62,
+    borderColor: 'gray',
+    borderWidth: 1,
+    color: 'white',
+    fontSize: 26
+  }
+});
