@@ -22,10 +22,10 @@ Then click [here](https://expo.io/--/to-exp/exp%3A%2F%2Fexp.host%2F%40jethrodani
     # Install yarn
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt-get update && sudo apt-get install yarn
+    sudo apt-get update && sudo apt-get -y install yarn
 
     # Make sure it worked
-    yarn --version
+    yarn --version  #=> 1.12.3
     ```
 
 * `expo`
@@ -33,6 +33,8 @@ Then click [here](https://expo.io/--/to-exp/exp%3A%2F%2Fexp.host%2F%40jethrodani
     ```
     yarn global add expo-cli
     ```
+
+Then `yarn install` and you're done.
 
 ### Usage
 
