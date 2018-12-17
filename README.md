@@ -4,11 +4,19 @@ productivity is a small app that does some basic algebra:
 
 > `total time = assigned time + extra time`
 
-> `productivity = total time / rate`
+> `rate = assigned time / total time`
 
-## Setup
+# Installation
 
-* `yarn` - See [here](https://yarnpkg.com/en/docs/install) for installation instructions.
+To install the app, you're gonna need [Expo](https://expo.io/). Download it for [Android](http://bit.ly/2bZq5ew) or [iOS](http://apple.co/2c6HMtp).
+
+Then click [here](https://expo.io/--/to-exp/exp%3A%2F%2Fexp.host%2F%40jethrodaniel%2Fproductivity) to open in Expo.
+
+## Development
+
+### Setup
+
+* `yarn` - [Installation instructions](https://yarnpkg.com/en/docs/install)
 
     ```
     # Install yarn
@@ -26,7 +34,7 @@ productivity is a small app that does some basic algebra:
     yarn global add expo-cli
     ```
 
-## Development
+### Usage
 
 * `yarn start` - To start the expo server and connect with a device
 * `yarn test` - To run the tests
