@@ -11,7 +11,12 @@ import ResultPage from './components/ResultPage';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { submitted: false };
+    this.state = {
+      hours: null,
+      minutes: null,
+      rate: null,
+      submitted: false
+    };
   }
 
   // Logs a button press to the console
@@ -48,5 +53,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-around',
     paddingTop: 10
+  },
+  button: {
+    color: '#841584'
   }
 });

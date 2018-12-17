@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   Button,
+  Platform,
   Text,
   View
 } from 'react-native';
@@ -17,6 +18,7 @@ export default class ResultPage extends React.Component {
         <Button
           onPress={this.props.onPress}
           title="Enter another input"
+          color={Platform.OS === 'ios' ? 'black' : '#841584' }
         />
       </View>
     );

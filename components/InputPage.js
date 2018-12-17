@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, View } from 'react-native';
+import { Button, Platform, View } from 'react-native';
 
 import NumberInput from './NumberInput';
 import Header from './Header';
@@ -16,6 +16,7 @@ export default class InputPage extends React.Component {
         <Button
           onPress={this.props.onPress}
           title='Calculate'
+          color={Platform.OS === 'ios' ? 'black' : '#841584' }
         />
       </View>
     );
