@@ -11,12 +11,7 @@ import ResultPage from './components/ResultPage';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      hours: null,
-      minutes: null,
-      rate: null,
-      submitted: false
-    };
+    this.state = { submitted: false };
   }
 
   // Logs a button press to the console
@@ -43,7 +38,12 @@ export default class App extends React.Component {
   // Returns to the input page
   goBack = () => {
     this.logPress();
-    this.setState({submitted: false});
+    this.setState({
+      submitted: false,
+      hours: null,
+      minutes: null,
+      rate: null
+    });
   }
 
   render() {
@@ -58,7 +58,15 @@ export default class App extends React.Component {
         />
       );
     } else {
-      return <ResultPage styles={styles} onPress={this.goBack}/>;
+      return (
+        <ResultPage
+          styles={styles}
+          onPress={this.goBack}
+          hours={this.state.hours}
+          minutes={this.state.minutes}
+          rate={this.state.rate}
+        />
+      );
     }
   }
 }
