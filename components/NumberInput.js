@@ -5,7 +5,11 @@ import { Alert, StyleSheet, TextInput, View } from 'react-native';
 export default class NumberInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { text: '', valid: false, value: null };
+    this.state = {
+      text: '',
+      valid: false,
+      value: null
+    };
   }
 
   // Checks whether a string contains a non-negative number
@@ -32,6 +36,8 @@ export default class NumberInput extends React.Component {
 
       this.setState({valid: false});
     }
+
+    this.props.click(this.state.value);
   }
 
   render() {
@@ -45,8 +51,8 @@ export default class NumberInput extends React.Component {
           onEndEditing={this.onEndEditing}
           value={this.state.text}
           placeholder={this.props.field}
-          keyboardType="numeric"
-          returnKeyType="next"
+          keyboardType='numeric'
+          returnKeyType='next'
         />
       </View>
     );
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     color: 'white',
     fontSize: 26,
+    paddingLeft: 10,
     height: 62,
     width: 160
   }

@@ -10,9 +10,9 @@ export default class InputPage extends React.Component {
     return (
       <View style={this.props.styles.app}>
         <Header msg={'Enter scheduled time'}/>
-        <NumberInput field={'Hours'}/>
-        <NumberInput field={'Minutes'}/>
-        <NumberInput field={'Rate'}/>
+        <NumberInput field={'Hours'} click={this.props.submitHours}/>
+        <NumberInput field={'Minutes'} click={this.props.submitMinutes}/>
+        <NumberInput field={'Rate'} click={this.props.submitRate}/>
         <Button
           onPress={this.props.onPress}
           title='Calculate'
