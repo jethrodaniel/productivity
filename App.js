@@ -29,7 +29,7 @@ export default class App extends React.Component {
   submit = () => {
     this.logPress();
 
-    if (this.state.hours && this.state.minutes && this.state.rate)
+    if ((this.state.hours + this.state.minutes + this.state.rate) > 0.0)
       this.setState({submitted: true});
     else
       Alert.alert('Fill out all fields first.');
