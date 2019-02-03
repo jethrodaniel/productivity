@@ -13,6 +13,7 @@
     "eject": "expo eject",
     "android": "expo android",
     "ios": "expo ios",
+    "publish": "expo publish",
     "test": "jest"
   },
   "jest": {
