@@ -74,7 +74,7 @@ export default class ResultPage extends React.Component {
 const styles = StyleSheet.create({
   heading: {
     color: 'white',
-    fontSize: 26,
+    fontSize: 20,
     width: 300
   }
 });
