@@ -10,7 +10,7 @@ productivity is a small app that does some basic algebra:
 
 To install the app, you're gonna need [Expo](https://expo.io/). Download it for [Android](http://bit.ly/2bZq5ew) or [iOS](http://apple.co/2c6HMtp).
 
-Then click [here](https://expo.io/--/to-exp/exp%3A%2F%2Fexp.host%2F%40jethrodaniel%2Fproductivity) to open in Expo.
+Available [here](https://expo.io/@jethrodaniel/productivity).
 
 ## Development
 

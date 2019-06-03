@@ -17,7 +17,7 @@ export default class Header extends React.Component {
 const styles = StyleSheet.create({
   header: {
     color: 'white',
-    fontSize: 32
+    fontSize: 26
   }
 });
 
