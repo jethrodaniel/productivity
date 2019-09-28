@@ -15,13 +15,10 @@ exports[`renders without crashing 1`] = `
 >
   <View>
     <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
       style={
         Object {
           "color": "white",
-          "fontSize": 32,
+          "fontSize": 26,
         }
       }
     >
@@ -35,6 +32,7 @@ exports[`renders without crashing 1`] = `
       onChangeText={[Function]}
       onEndEditing={[Function]}
       placeholder="Hours"
+      rejectResponderTermination={true}
       returnKeyType="next"
       style={
         Object {
@@ -47,6 +45,7 @@ exports[`renders without crashing 1`] = `
           "width": 160,
         }
       }
+      underlineColorAndroid="transparent"
       value=""
     />
   </View>
@@ -57,6 +56,7 @@ exports[`renders without crashing 1`] = `
       onChangeText={[Function]}
       onEndEditing={[Function]}
       placeholder="Minutes"
+      rejectResponderTermination={true}
       returnKeyType="next"
       style={
         Object {
@@ -69,6 +69,7 @@ exports[`renders without crashing 1`] = `
           "width": 160,
         }
       }
+      underlineColorAndroid="transparent"
       value=""
     />
   </View>
@@ -79,6 +80,7 @@ exports[`renders without crashing 1`] = `
       onChangeText={[Function]}
       onEndEditing={[Function]}
       placeholder="Rate"
+      rejectResponderTermination={true}
       returnKeyType="next"
       style={
         Object {
@@ -91,24 +93,15 @@ exports[`renders without crashing 1`] = `
           "width": 160,
         }
       }
+      underlineColorAndroid="transparent"
       value=""
     />
   </View>
   <View
-    accessibilityComponentType="button"
-    accessibilityLabel={undefined}
-    accessibilityTraits={
-      Array [
-        "button",
-      ]
-    }
+    accessibilityRole="button"
+    accessibilityStates={Array []}
     accessible={true}
-    collapsable={undefined}
-    hasTVPreferredFocus={undefined}
-    hitSlop={undefined}
     isTVSelectable={true}
-    nativeID={undefined}
-    onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -120,8 +113,6 @@ exports[`renders without crashing 1`] = `
         "opacity": 1,
       }
     }
-    testID={undefined}
-    tvParallaxProperties={undefined}
   >
     <View
       style={
@@ -131,10 +122,6 @@ exports[`renders without crashing 1`] = `
       }
     >
       <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={undefined}
-        ellipsizeMode="tail"
         style={
           Array [
             Object {
