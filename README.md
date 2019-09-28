@@ -2,9 +2,20 @@
 
 productivity is a small app that does some basic algebra:
 
-> `total time = assigned time + extra time`
+> I'm supposed to spend r% of my time doing so and so out of the total time.
 
-> `rate = assigned time / total time`
+> If I'm assigned x hours and y minutes of so and so, what will be my total time?
+
+```
+assigned_time = 5 hours and 3 minutes
+r             = 0.8
+total_time    = assigned_time / r # => 5 hours, 37 minutes
+```
+
+# todo
+
+- [ ] get tests working
+- [ ] add CI with github actions
 
 # Installation
 
@@ -14,29 +25,36 @@ Available [here](https://expo.io/@jethrodaniel/productivity).
 
 ## Development
 
-### Setup
+```
+#
+# Setup
+#
 
-* `yarn` - [Installation instructions](https://yarnpkg.com/en/docs/install)
+#-- yarn ----------------------------------------------------
+#
+# See https://yarnpkg.com/en/docs/install
 
-    ```
-    # Install yarn
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    sudo apt-get update && sudo apt-get -y install yarn
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get -y install yarn
 
-    # Make sure it worked
-    yarn --version  #=> 1.12.3
-    ```
+# Make sure it worked
+yarn --version  #=> 1.17.4
 
-* `expo`
+#-- expo ----------------------------------------------------
+yarn global add expo-cli
 
-    ```
-    yarn global add expo-cli
-    ```
+#-- install dependencies ------------------------------------
+yarn install
 
-Then `yarn install` and you're done.
+#
+# Usage
+#
 
-### Usage
+#-- start the app locally -----------------------------------
+yarn start
+```
 
-* `yarn start` - To start the expo server and connect with a device
-* `yarn test` - To run the tests
+### LICENSE
+
+MIT.
