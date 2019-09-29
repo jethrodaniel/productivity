@@ -3,12 +3,14 @@
 productivity is a small app that does some basic algebra:
 
 > I'm supposed to spend r% of my time doing so and so out of the total time.
+
 > If I'm assigned x hours and y minutes of so and so, what will be my total time?
 
 ```
-assigned_time = 5 hours and 3 minutes
-r             = 0.8
-total_time    = assigned_time / r # => 5 hours, 37 minutes
+assigned_time   = 5 hours and 3 minutes
+rate            = 0.8
+# assigned_time = total_time * 0.8
+total_time      = assigned_time / rate # => 5 hours, 37 minutes
 ```
 
 # Installation
@@ -41,8 +43,8 @@ yarn install
 ```
 
 ### Usage
-```
 
+```
 #-- start the app locally -----------------------------------
 yarn start
 
