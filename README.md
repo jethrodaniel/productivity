@@ -2,7 +2,7 @@
 
 ![](https://github.com/jethrodaniel/productivity/workflows/build/badge.svg)
 
-productivity is a small app that does some basic algebra:
+productivity is a small android/ios app that does some basic algebra:
 
 > I'm supposed to spend r% of my time doing so and so out of the total time.
 
@@ -19,9 +19,11 @@ total_time      = assigned_time / rate # => 5 hours, 37 minutes
 
 To install the app, you're gonna need [Expo](https://expo.io/). Download it for [Android](http://bit.ly/2bZq5ew) or [iOS](http://apple.co/2c6HMtp).
 
-Available [here](https://expo.io/@jethrodaniel/productivity).
+Once that's installed, download this app [here](https://expo.io/@jethrodaniel/productivity).
 
 ## Development
+
+productivity is a typical react-native app that is deployed using the expo platform.
 
 ### Setup
 
