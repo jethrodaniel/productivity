@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View>
+  <TextInput
+    allowFontScaling={true}
+    keyboardType="numeric"
+    onChangeText={[Function]}
+    onEndEditing={[Function]}
+    rejectResponderTermination={true}
+    returnKeyType="next"
+    style={
+      Object {
+        "borderColor": "gray",
+        "borderWidth": 1,
+        "color": "white",
+        "fontSize": 26,
+        "height": 62,
+        "paddingLeft": 10,
+        "width": 160,
+      }
+    }
+    underlineColorAndroid="transparent"
+    value=""
+  />
+</View>
+`;
