@@ -1,5 +1,7 @@
 # productivity
 
+![](https://github.com/jethrodaniel/productivity/workflows/build/badge.svg)
+
 productivity is a small app that does some basic algebra:
 
 > I'm supposed to spend r% of my time doing so and so out of the total time.
