@@ -11,7 +11,7 @@ productivity is a small app that does some basic algebra:
 ```
 assigned_time   = 5 hours and 3 minutes
 rate            = 0.8
-# assigned_time = total_time * 0.8
+# assigned_time = total_time * rate
 total_time      = assigned_time / rate # => 5 hours, 37 minutes
 ```
 
@@ -25,35 +25,47 @@ Available [here](https://expo.io/@jethrodaniel/productivity).
 
 ### Setup
 
-```
-#-- yarn ----------------------------------------------------
-#
-# See https://yarnpkg.com/en/docs/install
+#### yarn
 
+See https://yarnpkg.com/en/docs/install
+
+```
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 sudo apt-get update && sudo apt-get -y install yarn
 
 # Make sure it worked
 yarn --version  #=> 1.17.4
+```
 
-#-- expo ----------------------------------------------------
+#### expo
+
+See https://docs.expo.io/versions/latest/introduction/installation/
+
+```
 yarn global add expo-cli
+```
 
-#-- install dependencies ------------------------------------
+#### Setup this project
+
+```
 yarn install
 ```
 
 ### Usage
 
-```
-#-- start the app locally -----------------------------------
-yarn start
+To start the app locally
 
-#-- run the tests -------------------------------------------
+```
+yarn start
+```
+
+To run the tests
+
+```
 yarn test
 ```
 
 ### LICENSE
 
-MIT, of course.
+[MIT](LICENSE.txt)
