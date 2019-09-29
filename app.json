@@ -3,6 +3,8 @@
     "name": "productivity",
     "slug": "productivity",
     "privacy": "public",
+    "description": "a small app that does some basic algebra",
+    "githubUrl": "https://github.com/jethrodaniel/productivity",
     "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
