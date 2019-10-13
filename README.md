@@ -15,15 +15,17 @@ rate            = 0.8
 total_time      = assigned_time / rate # => 5 hours, 37 minutes
 ```
 
-# Installation
+# Installation (for users)
 
 To install the app, you're gonna need [Expo](https://expo.io/). Download it for [Android](http://bit.ly/2bZq5ew) or [iOS](http://apple.co/2c6HMtp).
 
 Once that's installed, download this app [here](https://expo.io/@jethrodaniel/productivity).
 
-## Development
+# About
 
-productivity is a typical react-native app that is deployed using the expo platform.
+productivity is a basic react-native app that is deployed using the expo platform.
+
+## Development
 
 ### Setup
 
@@ -48,6 +50,12 @@ See https://docs.expo.io/versions/latest/introduction/installation/
 yarn global add expo-cli
 ```
 
+#### cake and coffee
+
+```
+yarn global add coffeescript
+```
+
 #### Setup this project
 
 ```
@@ -59,13 +67,13 @@ yarn install
 To start the app locally
 
 ```
-yarn start
+cake start
 ```
 
 To run the tests
 
 ```
-yarn test
+cake test
 ```
 
 ### LICENSE
