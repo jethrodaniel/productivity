@@ -1,7 +1,7 @@
 {
   "name": "productivity",
   "version": "1.0.5",
-  "main": "./AppEntry.js",
+  "main": "./src/AppEntry.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
