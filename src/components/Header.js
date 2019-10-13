@@ -7,7 +7,7 @@ export default class Header extends React.Component {
   render() {
     return (
       e(View, {},
-        e(Text, {style: styles.header}, null)
+        e(Text, {style: styles.header}, this.props.msg)
       )
     );
   }
