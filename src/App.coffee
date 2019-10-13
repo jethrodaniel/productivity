@@ -31,7 +31,7 @@ export default class App extends React.Component
       @state.hours
       @state.minutes
       @state.rate
-    ].every (n) => n >= 0
+    ].every (n) => n? and n >= 0
 
     if valid
       @setState submitted: true
