@@ -1,4 +1,5 @@
 import React, { Button } from 'react';
+const e = React.createElement;
 
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 
@@ -42,11 +43,8 @@ export default class NumberInput extends React.Component {
 
   render() {
     return (
-      React.createElement(
-        View,
-        {},
-        React.createElement(
-          TextInput,
+      e(View, {},
+        e(TextInput,
           {
             style: styles.container,
             onChangeText: (text) => {

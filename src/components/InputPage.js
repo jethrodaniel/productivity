@@ -1,4 +1,5 @@
 import React from 'react';
+const e = React.createElement;
 
 import { Button, Platform, View } from 'react-native';
 
@@ -8,27 +9,12 @@ import Header from './Header';
 export default class InputPage extends React.Component {
   render() {
     return (
-      React.createElement(
-        View,
-        {style: this.props.styles.app},
-        React.createElement(Header, {msg: 'Enter scheduled time'}, null),
-        React.createElement(
-          NumberInput,
-          {field: 'Hours', click: this.props.submitHours},
-          null
-        ),
-        React.createElement(
-          NumberInput,
-          {field: 'Minutes', click: this.props.submitMinutes},
-          null
-        ),
-        React.createElement(
-          NumberInput,
-          {field: 'Rate', click: this.props.submitRate},
-          null
-        ),
-        React.createElement(
-          Button,
+      e(View, {style: this.props.styles.app},
+        e(Header, {msg: 'Enter scheduled time'}, null),
+        e(NumberInput, {field: 'Hours', click: this.props.submitHours}, null),
+        e(NumberInput, {field: 'Minutes', click: this.props.submitMinutes}, null),
+        e(NumberInput, {field: 'Rate', click: this.props.submitRate}, null),
+        e(Button,
           {
             onPress: this.props.onPress,
             title: 'Calculate',

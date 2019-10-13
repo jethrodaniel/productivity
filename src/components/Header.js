@@ -1,18 +1,13 @@
 import React from 'react';
+const e = React.createElement;
 
 import { Text, StyleSheet, View } from 'react-native';
 
 export default class Header extends React.Component {
   render() {
     return (
-      React.createElement(
-        View,
-        {},
-        React.createElement(
-          Text,
-          {style: styles.header},
-          null
-        )
+      e(View, {},
+        e(Text, {style: styles.header}, null)
       )
     );
   }

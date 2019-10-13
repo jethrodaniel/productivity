@@ -1,4 +1,5 @@
 import React from 'react';
+const e = React.createElement;
 
 import { Alert, StyleSheet } from 'react-native';
 
@@ -55,7 +56,7 @@ export default class App extends React.Component {
   render() {
     if (!this.state.submitted) {
       return (
-        React.createElement(
+        e(
           InputPage,
           {
             styles: styles,
@@ -69,7 +70,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        React.createElement(
+        e(
           ResultPage,
           {
             styles: styles,

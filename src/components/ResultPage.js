@@ -1,4 +1,5 @@
 import React from 'react';
+const e = React.createElement;
 
 import {
   Button,
@@ -13,11 +14,9 @@ import Header from './Header';
 
 const Heading = (props) => {
   return (
-    <View>
-      <Text style={styles.heading}>
-        {props.msg}
-      </Text>
-    </View>
+    e(View, {},
+      e(Text, {style: styles.heading}, props.msg)
+    )
   );
 }
 
@@ -56,25 +55,12 @@ function totalTime(hours, minutes, rate) {
 export default class ResultPage extends React.Component {
   render() {
     return (
-      React.createElement(View, {style: this.props.styles.app},
-        React.createElement(Header, {msg: 'Results'}, null),
-        React.createElement(
-          Heading,
-          {msg: scheduledTime(this.props.hours, this.props.minutes)},
-          null
-        ),
-        React.createElement(
-          Heading,
-          {msg: requires(this.props.hours, this.props.minutes, this.props.rate)},
-          null
-        ),
-        React.createElement(
-          Heading,
-          {msg: totalTime(this.props.hours, this.props.minutes, this.props.rate)},
-          null
-        ),
-        React.createElement(
-          Button,
+      e(View, {style: this.props.styles.app},
+        e(Header, {msg: 'Results'}, null),
+        e(Heading, {msg: scheduledTime(this.props.hours, this.props.minutes)}, null),
+        e(Heading, {msg: requires(this.props.hours, this.props.minutes, this.props.rate)}, null),
+        e(Heading, {msg: totalTime(this.props.hours, this.props.minutes, this.props.rate)}, null),
+        e(Button,
           {
             onPress: this.props.onPress,
             title: "Enter another input",
