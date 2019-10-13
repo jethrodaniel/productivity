@@ -42,19 +42,25 @@ export default class NumberInput extends React.Component {
 
   render() {
     return (
-      <View>
-        <TextInput
-          style={styles.container}
-          onChangeText={(text) => {
-            this.setState({text: text, value: Number.parseFloat(text)})
-          }}
-          onEndEditing={this.onEndEditing}
-          value={this.state.text}
-          placeholder={this.props.field}
-          keyboardType='numeric'
-          returnKeyType='next'
-        />
-      </View>
+      React.createElement(
+        View,
+        {},
+        React.createElement(
+          TextInput,
+          {
+            style: styles.container,
+            onChangeText: (text) => {
+              this.setState({text: text, value: Number.parseFloat(text)})
+            },
+            onEndEditing: this.onEndEditing,
+            value: this.state.text,
+            placeholder: this.props.field,
+            keyboardType: 'numeric',
+            returnKeyType: 'next'
+          },
+          null
+        )
+      )
     );
   }
 }

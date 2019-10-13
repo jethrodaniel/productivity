@@ -56,17 +56,33 @@ function totalTime(hours, minutes, rate) {
 export default class ResultPage extends React.Component {
   render() {
     return (
-      <View style={this.props.styles.app}>
-        <Header msg={'Results'}/>
-        <Heading msg={scheduledTime(this.props.hours, this.props.minutes)}/>
-        <Heading msg={requires(this.props.hours, this.props.minutes, this.props.rate)}/>
-        <Heading msg={totalTime(this.props.hours, this.props.minutes, this.props.rate)}/>
-        <Button
-          onPress={this.props.onPress}
-          title="Enter another input"
-          color={Platform.OS === 'ios' ? 'black' : '#841584' }
-        />
-      </View>
+      React.createElement(View, {style: this.props.styles.app},
+        React.createElement(Header, {msg: 'Results'}, null),
+        React.createElement(
+          Heading,
+          {msg: scheduledTime(this.props.hours, this.props.minutes)},
+          null
+        ),
+        React.createElement(
+          Heading,
+          {msg: requires(this.props.hours, this.props.minutes, this.props.rate)},
+          null
+        ),
+        React.createElement(
+          Heading,
+          {msg: totalTime(this.props.hours, this.props.minutes, this.props.rate)},
+          null
+        ),
+        React.createElement(
+          Button,
+          {
+            onPress: this.props.onPress,
+            title: "Enter another input",
+            color: (Platform.OS === 'ios' ? 'black' : '#841584')
+          },
+          null
+        )
+      )
     );
   }
 }

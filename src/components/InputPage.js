@@ -8,17 +8,35 @@ import Header from './Header';
 export default class InputPage extends React.Component {
   render() {
     return (
-      <View style={this.props.styles.app}>
-        <Header msg={'Enter scheduled time'}/>
-        <NumberInput field={'Hours'} click={this.props.submitHours}/>
-        <NumberInput field={'Minutes'} click={this.props.submitMinutes}/>
-        <NumberInput field={'Rate'} click={this.props.submitRate}/>
-        <Button
-          onPress={this.props.onPress}
-          title='Calculate'
-          color={Platform.OS === 'ios' ? 'black' : '#841584' }
-        />
-      </View>
+      React.createElement(
+        View,
+        {style: this.props.styles.app},
+        React.createElement(Header, {msg: 'Enter scheduled time'}, null),
+        React.createElement(
+          NumberInput,
+          {field: 'Hours', click: this.props.submitHours},
+          null
+        ),
+        React.createElement(
+          NumberInput,
+          {field: 'Minutes', click: this.props.submitMinutes},
+          null
+        ),
+        React.createElement(
+          NumberInput,
+          {field: 'Rate', click: this.props.submitRate},
+          null
+        ),
+        React.createElement(
+          Button,
+          {
+            onPress: this.props.onPress,
+            title: 'Calculate',
+            color: (Platform.OS === 'ios' ? 'black' : '#841584')
+          },
+          null
+        )
+      )
     );
   }
 }

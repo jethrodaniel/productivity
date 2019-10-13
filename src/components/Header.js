@@ -5,11 +5,15 @@ import { Text, StyleSheet, View } from 'react-native';
 export default class Header extends React.Component {
   render() {
     return (
-      <View>
-        <Text style={styles.header}>
-          {this.props.msg}
-        </Text>
-      </View>
+      React.createElement(
+        View,
+        {},
+        React.createElement(
+          Text,
+          {style: styles.header},
+          null
+        )
+      )
     );
   }
 }
@@ -20,4 +24,3 @@ const styles = StyleSheet.create({
     fontSize: 26
   }
 });
-
