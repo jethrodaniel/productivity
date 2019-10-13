@@ -21,7 +21,9 @@ exports[`App renders 1`] = `
           "fontSize": 26,
         }
       }
-    />
+    >
+      Enter scheduled time
+    </Text>
   </View>
   <View>
     <TextInput
