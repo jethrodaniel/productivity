@@ -60,9 +60,9 @@ export default class App extends React.Component {
           InputPage,
           {
             styles: styles,
-            submitHours: (hours) => this.setState(hours),
-            submitMinutes: (minutes) => this.setState(minutes),
-            submitRate: (rate) => this.setState(rate),
+            submitHours: (hours) => this.setState({hours: hours}),
+            submitMinutes: (minutes) => this.setState({minutes: minutes}),
+            submitRate: (rate) => this.setState({rate: rate}),
             onPress: this.submit
           },
           null
