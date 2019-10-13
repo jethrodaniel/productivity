@@ -14,24 +14,24 @@ export default class App extends React.Component
     @state = submitted: false
 
   # Logs a button press to the console
-  logPress = () =>
+  logPress: () =>
     console.log """
       Pressed a button! submitted: #{@state.submitted}
 
-      hours: #{@state.hours}
+      hours:   #{@state.hours}
       minutes: #{@state.minutes}
-      rate: #{@state.rate}
+      rate:    #{@state.rate}
     """
 
   # Submits the input page
-  submit = () =>
-    @.logPress()
+  submit: () =>
+    @logPress()
 
     valid = [
       @state.hours
       @state.minutes
       @state.rate
-    ].every((n) => n >= 0)
+    ].every (n) => n >= 0
 
     if valid
       @setState submitted: true
@@ -39,18 +39,26 @@ export default class App extends React.Component
       Alert.alert 'Fill out all fields first.'
 
   # Returns to the input page
-  goBack = () =>
+  goBack: () =>
     @logPress()
     @setState
       submitted: false
       hours: null
       minutes: null
-      rate: nul
+      rate: null
 
-  render: () ->
-    if @state.submitted
-      e(
-        ResultPage,
+  render: ->
+    unless @state.submitted
+      e(InputPage,
+        styles: styles
+        submitHours: (hours) => @setState(hours: hours)
+        submitMinutes: (minutes) => @setState(minutes: minutes)
+        submitRate: (rate) => @setState(rate: rate)
+        onPress: @submit,
+        null
+      )
+    else
+      e(ResultPage,
         styles: styles
         onPress: @goBack
         hours: @state.hours
@@ -58,17 +66,6 @@ export default class App extends React.Component
         rate: @state.rate,
         null
       )
-    else
-      e(
-        InputPage,
-        styles: styles
-        submitHours: (hours) => @setState(hours: hours)
-        submitMinutes: (minutes) => @setState(minutes: minutes)
-        submitRate: (rate) => @setState(rate: rate)
-        onPress: @.submit,
-        null
-      )
-
 
 styles = StyleSheet.create(
   app:
@@ -77,7 +74,7 @@ styles = StyleSheet.create(
     flex: 1
     flexDirection: 'column'
     justifyContent: 'space-around'
-    paddingTop: 1
+    paddingTop: 10
   button:
     color: '#841584'
 )
