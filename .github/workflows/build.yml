@@ -16,8 +16,7 @@ jobs:
     - name: yarn install
       run: yarn install
 
-    - name: install coffee and cake
-      run: yarn global add coffeescript
-
     - name: test
-      run: cake test
+      run: yarn run cake test
+      env:
+        CI: true
