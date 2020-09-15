@@ -79,6 +79,34 @@ class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   final _normalFontSize = new TextStyle(fontSize: 36.0);
 
+  Widget _numericInput(String name) {
+    return TextFormField(
+        decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        labelText: name,
+      ),
+      keyboardType: TextInputType.number,
+      validator: (value) {
+        if (value.isEmpty)
+          return 'Please enter a value';
+        return null;
+      },
+    );
+  }
+
+  Widget _submitButton() {
+    return RaisedButton(
+      onPressed: () {
+        if (_formKey.currentState.validate()) {
+          Scaffold
+            .of(context)
+            .showSnackBar(SnackBar(content: Text('Processing Data')));
+        }
+      },
+      child: Text('Submit'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,29 +121,15 @@ class MyCustomFormState extends State<MyCustomForm> {
             Text('Enter Scheduled Time', textScaleFactor: 2),
             SizedBox(height: 20),
             Column(
+               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Hours',
-                  ),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value.isEmpty)
-                      return 'Please enter some text';
-                    return null;
-                  },
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      Scaffold
-                        .of(context)
-                        .showSnackBar(SnackBar(content: Text('Processing Data')));
-                    }
-                  },
-                  child: Text('Submit'),
-                )
+                _numericInput("Hours"),
+                SizedBox(height: 20),
+                _numericInput("Minutes"),
+                SizedBox(height: 20),
+                _numericInput("Rate"),
+                SizedBox(height: 20),
+                _submitButton()
               ]
             ),
           ],
