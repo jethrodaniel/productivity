@@ -33,49 +33,29 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
-        ],
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             Text(''), // todo: spacing?
-            MyCustomForm()
+            AppForm()
           ],
         ),
-      ),
-    );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Page Two'),
-            ),
-            body: Center(
-              child: Text("wow!"),
-            ),
-          );
-        },
       ),
     );
   }
 }
 
 // Define a custom Form widget.
-class MyCustomForm extends StatefulWidget {
+class AppForm extends StatefulWidget {
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  AppFormState createState() {
+    return AppFormState();
   }
 }
 
 // https://flutter.dev/docs/cookbook/forms/validation
-class MyCustomFormState extends State<MyCustomForm> {
+class AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
   final _normalFontSize = new TextStyle(fontSize: 36.0);
 
@@ -98,9 +78,21 @@ class MyCustomFormState extends State<MyCustomForm> {
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
-          Scaffold
-            .of(context)
-            .showSnackBar(SnackBar(content: Text('Processing Data')));
+					_formKey.currentState.save();
+    			Navigator.of(context).push(
+    			  MaterialPageRoute<void>(
+    			    builder: (BuildContext context) {
+								return Scaffold(
+          			  appBar: AppBar(
+          			    title: Text('Page Two'),
+          			  ),
+          			  body: Center(
+          			    child: Text("wow!"),
+          			  ),
+          			);
+    			    },
+    			  ),
+    			);
         }
       },
       child: Text('Submit'),
