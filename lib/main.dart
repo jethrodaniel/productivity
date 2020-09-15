@@ -57,9 +57,9 @@ class AppForm extends StatefulWidget {
 // https://flutter.dev/docs/cookbook/forms/validation
 class AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
-  final _normalFontSize = new TextStyle(fontSize: 36.0);
+  int hours, minutes, rate;
 
-  Widget _numericInput(String name) {
+  Widget _numericInput(String name, Function(String) saveFunc) {
     return TextFormField(
         decoration: InputDecoration(
         border: OutlineInputBorder(),
@@ -71,6 +71,7 @@ class AppFormState extends State<AppForm> {
           return 'Please enter a value';
         return null;
       },
+      onSaved: saveFunc
     );
   }
 
@@ -78,21 +79,32 @@ class AppFormState extends State<AppForm> {
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
-					_formKey.currentState.save();
-    			Navigator.of(context).push(
-    			  MaterialPageRoute<void>(
-    			    builder: (BuildContext context) {
-								return Scaffold(
-          			  appBar: AppBar(
-          			    title: Text('Page Two'),
-          			  ),
-          			  body: Center(
-          			    child: Text("wow!"),
-          			  ),
-          			);
-    			    },
-    			  ),
-    			);
+          _formKey.currentState.save();
+
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(
+              builder: (BuildContext context) {
+                return Scaffold(
+                  appBar: AppBar(
+                    title: Text("Results"),
+                  ),
+                  body: Center( // todo: simple list here
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Text("Hours: ${hours}", textScaleFactor: 3),
+                            Text("Minutes: ${minutes}", textScaleFactor: 3),
+                            Text("Rate: ${rate}", textScaleFactor: 3),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
         }
       },
       child: Text('Submit'),
@@ -115,11 +127,11 @@ class AppFormState extends State<AppForm> {
             Column(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _numericInput("Hours"),
+                _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
                 SizedBox(height: 20),
-                _numericInput("Minutes"),
+                _numericInput("Minutes", (val) => setState(() => minutes = int.parse(val))),
                 SizedBox(height: 20),
-                _numericInput("Rate"),
+                _numericInput("Rate", (val) => setState(() => rate = int.parse(val))),
                 SizedBox(height: 20),
                 _submitButton()
               ]
