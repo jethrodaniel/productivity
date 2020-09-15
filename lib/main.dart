@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(App());
@@ -40,10 +41,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: <Widget>[
             Text(''), // todo: spacing?
-            Text(
-              'Enter Scheduled Time',
-              style: new TextStyle(fontSize: 36.0),
-            ),
+            MyCustomForm()
           ],
         ),
       ),
@@ -67,3 +65,63 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// Define a custom Form widget.
+class MyCustomForm extends StatefulWidget {
+  @override
+  MyCustomFormState createState() {
+    return MyCustomFormState();
+  }
+}
+
+// https://flutter.dev/docs/cookbook/forms/validation
+class MyCustomFormState extends State<MyCustomForm> {
+  final _formKey = GlobalKey<FormState>();
+  final _normalFontSize = new TextStyle(fontSize: 36.0);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      child:
+      Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment : MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text('Enter Scheduled Time', textScaleFactor: 2),
+            SizedBox(height: 20),
+            Column(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Hours',
+                  ),
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value.isEmpty)
+                      return 'Please enter some text';
+                    return null;
+                  },
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      Scaffold
+                        .of(context)
+                        .showSnackBar(SnackBar(content: Text('Processing Data')));
+                    }
+                  },
+                  child: Text('Submit'),
+                )
+              ]
+            ),
+          ],
+        )
+      )
+    );
+  }
+}
+
