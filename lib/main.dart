@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Text(''), // todo: spacing?
             AppForm()
           ],
         ),
@@ -46,7 +45,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// Define a custom Form widget.
 class AppForm extends StatefulWidget {
   @override
   AppFormState createState() {
@@ -88,7 +86,7 @@ class AppFormState extends State<AppForm> {
                   appBar: AppBar(
                     title: Text("Results"),
                   ),
-                  body: Center( // todo: simple list here
+                  body: Center(
                     child: Row(
                       children: [
                         Column(
