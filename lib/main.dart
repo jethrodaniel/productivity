@@ -86,16 +86,18 @@ class AppFormState extends State<AppForm> {
                   appBar: AppBar(
                     title: Text("Results"),
                   ),
+            /* Text('Enter Scheduled Time', textScaleFactor: 2), */
                   body: Center(
+										padding: EdgeInsets.all(20),
                     child: Row(
+											mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Column(
-                          children: [
-                            Text("Hours: ${hours}", textScaleFactor: 3),
-                            Text("Minutes: ${minutes}", textScaleFactor: 3),
-                            Text("Rate: ${rate}", textScaleFactor: 3),
-                          ],
-                        ),
+                        Column(children: [
+                          Text("Scheduled Time"),
+                        ]),
+                        Column(children: [
+                          Text("${hours} hours, ${minutes} minutes"),
+                        ]),
                       ],
                     ),
                   ),
