@@ -10,11 +10,17 @@ class Duration {
   Duration(this.hours, this.minutes);
   @override
   String toString() {
-    return "$hours hours, $minutes minutes";
+    return "$hours h, $minutes m";
   }
 }
 
 class ScheduleMath {
+  final Duration treatment_time;
+
+  Duration total_time() {
+    return Duration(2, 3);
+  }
+  ScheduleMath(this.treatment_time);
 }
 
 class App extends StatelessWidget {
@@ -88,7 +94,8 @@ class AppFormState extends State<AppForm> {
 
 
   Widget _submitButton() {
-    var d = Duration(hours, minutes);
+    var sched = ScheduleMath(Duration(hours, minutes));
+
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
@@ -103,44 +110,60 @@ class AppFormState extends State<AppForm> {
                     Column(
                       // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+												Divider(color: Colors.blue,thickness: 2),
                         Container(padding: EdgeInsets.all(20), child: Column(children: [
                           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Column(children: [Text('x = rT', textScaleFactor: 2)]),
+                            Column(children: [Text('tx = r (T)', textScaleFactor: 2, style: TextStyle(fontStyle: FontStyle.italic))]),
                           ]),
                           SizedBox(height: 10),
                           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Column(children: [Text('T = x / r', textScaleFactor: 2)]),
+                            Column(children: [Text('T = tx / r', textScaleFactor: 2, style: TextStyle(fontStyle: FontStyle.italic))]),
                           ]),
                         ])),
+												Divider(color: Colors.blue, thickness: 2),
                         Container(padding: EdgeInsets.all(25), child:
                           Column(children: [
                             Row(children: [
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('Treatment (x)', textScaleFactor: 1.5)
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+																RichText(
+																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
+                                    TextSpan(text: 'Treatment '),
+                            		    TextSpan(text: '(tx)', style: TextStyle(fontStyle: FontStyle.italic)),
+																	])
+																)
                               ])),
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${d.hours} h, ${d.minutes} m', textScaleFactor: 1.5),
+                                Text('${sched.treatment_time}', textScaleFactor: 1.5),
                               ]))
                             ]),
-                            SizedBox(height: 20),
+                            SizedBox(height: 30),
                             Row(children: [
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('Rate (r)', textScaleFactor: 1.5)
+																RichText(
+																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
+                                    TextSpan(text: 'Rate '),
+                            		    TextSpan(text: '(r)', style: TextStyle(fontStyle: FontStyle.italic)),
+																	])
+																)
                               ])),
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('$rate%', textScaleFactor: 1.5)
+                                Text('$rate% = ${rate / 100}', textScaleFactor: 1.5)
                               ]))
                             ]),
-                            SizedBox(height: 20),
+                            SizedBox(height: 30),
                             Row(children: [
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('Total (T)', textScaleFactor: 1.5)
+																RichText(
+																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
+                                    TextSpan(text: 'Total '),
+                            		    TextSpan(text: '(T)', style: TextStyle(fontStyle: FontStyle.italic)),
+																	])
+																)
                               ])),
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${d.hours} h, ${d.minutes} m', textScaleFactor: 1.5),
+                                Text('${sched.total_time()}', textScaleFactor: 1.5),
                               ]))
                             ]),
-
                           ]),
                         )
                     ])
@@ -174,7 +197,7 @@ class AppFormState extends State<AppForm> {
                 SizedBox(height: 20),
                 _numericInput("Minutes", (val) => setState(() => minutes = int.parse(val))),
                 SizedBox(height: 20),
-                _numericInput("Rate", (val) => setState(() => rate = int.parse(val))),
+                _numericInput("Rate (%)", (val) => setState(() => rate = int.parse(val))),
                 SizedBox(height: 20),
                 _submitButton()
               ]
