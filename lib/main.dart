@@ -5,6 +5,18 @@ void main() {
   runApp(App());
 }
 
+class Duration {
+  final int hours, minutes;
+  Duration(this.hours, this.minutes);
+  @override
+  String toString() {
+    return "$hours hours, $minutes minutes";
+  }
+}
+
+class ScheduleMath {
+}
+
 class App extends StatelessWidget {
   final _title = 'Productivity';
 
@@ -73,7 +85,10 @@ class AppFormState extends State<AppForm> {
     );
   }
 
+
+
   Widget _submitButton() {
+    var d = Duration(hours, minutes);
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
@@ -83,24 +98,52 @@ class AppFormState extends State<AppForm> {
             MaterialPageRoute<void>(
               builder: (BuildContext context) {
                 return Scaffold(
-                  appBar: AppBar(
-                    title: Text("Results"),
-                  ),
-            /* Text('Enter Scheduled Time', textScaleFactor: 2), */
-                  body: Center(
-										padding: EdgeInsets.all(20),
-                    child: Row(
-											mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  appBar: AppBar(title: Text("Results")),
+                  body: //Center(child:
+                    Column(
+                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Column(children: [
-                          Text("Scheduled Time"),
-                        ]),
-                        Column(children: [
-                          Text("${hours} hours, ${minutes} minutes"),
-                        ]),
-                      ],
-                    ),
-                  ),
+                        Container(padding: EdgeInsets.all(20), child: Column(children: [
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('x = rT', textScaleFactor: 2)]),
+                          ]),
+                          SizedBox(height: 10),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('T = x / r', textScaleFactor: 2)]),
+                          ]),
+                        ])),
+                        Container(padding: EdgeInsets.all(25), child:
+                          Column(children: [
+                            Row(children: [
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('Treatment (x)', textScaleFactor: 1.5)
+                              ])),
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('${d.hours} h, ${d.minutes} m', textScaleFactor: 1.5),
+                              ]))
+                            ]),
+                            SizedBox(height: 20),
+                            Row(children: [
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('Rate (r)', textScaleFactor: 1.5)
+                              ])),
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('$rate%', textScaleFactor: 1.5)
+                              ]))
+                            ]),
+                            SizedBox(height: 20),
+                            Row(children: [
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('Total (T)', textScaleFactor: 1.5)
+                              ])),
+                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+                                Text('${d.hours} h, ${d.minutes} m', textScaleFactor: 1.5),
+                              ]))
+                            ]),
+
+                          ]),
+                        )
+                    ])
                 );
               },
             ),
@@ -122,7 +165,7 @@ class AppFormState extends State<AppForm> {
         child: Column(
           mainAxisAlignment : MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Text('Enter Scheduled Time', textScaleFactor: 2),
+            Text('Enter Treatment Time', textScaleFactor: 2),
             SizedBox(height: 20),
             Column(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
