@@ -106,10 +106,17 @@ class AppFormState extends State<AppForm> {
   }
 
   Widget _formulaRow(parts) {
+    if (parts.length < 4)
+      parts.add('');
+    if (parts.length < 5)
+      parts.add('');
+
     return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      Expanded(flex: 1, child: Column(children: [Text(parts[0], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.end)),
-      Expanded(flex: 1, child: Column(children: [Text(parts[1], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-      Expanded(flex: 4, child: Column(children: [Text(parts[2], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
+      Expanded(flex: 1, child: Column(children: [Text(parts[0], textScaleFactor: 1.1, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.end)),
+      Expanded(flex: 1, child: Column(children: [Text(parts[1], textScaleFactor: 1.1, style: TextStyle(fontStyle: FontStyle.italic))])),
+      Expanded(flex: 4, child: Column(children: [Text(parts[2], textScaleFactor: 1.1, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
+      Expanded(flex: 1, child: Column(children: [Text(parts[3], textScaleFactor: 1.1, style: TextStyle(fontStyle: FontStyle.italic))])),
+      Expanded(flex: 1, child: Column(children: [Text(parts[4], textScaleFactor: 1.1, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
     ]);
   }
 
@@ -202,6 +209,8 @@ class AppFormState extends State<AppForm> {
                           _formulaRow(['r (T)', '=', '${tx_min}m']),
                           _formulaRow(['T', '=', '${tx_min}m / $r']),
                           _formulaRow(['T', '=', '${total_min.toStringAsFixed(2)}m']),
+                          _formulaRow(['T', '=', '(${total_min.toStringAsFixed(2)}m * (1h/60m))h', '=', '${h}h']),
+                          _formulaRow(['', '=', '(${total_min.toStringAsFixed(2)} - ${h * 60})m',  '=', '${m}m']),
                           _formulaRow(['r (T)', '=', '${Duration(h, m)}']),
                         ])),
 												Divider(color: Colors.blue, thickness: 2),
