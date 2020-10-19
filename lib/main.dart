@@ -105,6 +105,14 @@ class AppFormState extends State<AppForm> {
     );
   }
 
+  Widget _formulaRow(parts) {
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+      Expanded(flex: 1, child: Column(children: [Text(parts[0], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.end)),
+      Expanded(flex: 1, child: Column(children: [Text(parts[1], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
+      Expanded(flex: 4, child: Column(children: [Text(parts[2], textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
+    ]);
+  }
+
   Widget _submitButton() {
     return RaisedButton(
       onPressed: () {
@@ -186,41 +194,15 @@ class AppFormState extends State<AppForm> {
                         ),
                         Divider(color: Colors.blue,thickness: 2),
                         Container(padding: EdgeInsets.all(20), child: Column(children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('tx', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.end)),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('r (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('r (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.end)),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('tx', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))],crossAxisAlignment: CrossAxisAlignment.start)),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('r (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('${Duration(hours, minutes)}', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('r (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('${tx_min}m', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('T', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('${tx_min}m / $r', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('T', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('${total_min.toStringAsFixed(2)}m', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                          ]),
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Expanded(flex: 2, child: Column(children: [Text('T', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('=', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                            Expanded(flex: 2, child: Column(children: [Text('${Duration(h, m)}', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))])),
-                          ]),
+                          //_formulaRow(['treatment', '=', 'rate (total)']),
+                          _formulaRow(['tx', '=', 'r (T)']),
+                          _formulaRow(['r (T)', '=', 'tx']),
+                          _formulaRow(['r (T)', '=', '${Duration(hours, minutes)}']),
+                          _formulaRow(['r (T)', '=', '${hours}h * (60m/1h) + ${tx_min}m']),
+                          _formulaRow(['r (T)', '=', '${tx_min}m']),
+                          _formulaRow(['T', '=', '${tx_min}m / $r']),
+                          _formulaRow(['T', '=', '${total_min.toStringAsFixed(2)}m']),
+                          _formulaRow(['r (T)', '=', '${Duration(h, m)}']),
                         ])),
 												Divider(color: Colors.blue, thickness: 2),
                     ])
