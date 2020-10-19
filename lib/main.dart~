@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(App());
+void main() {
+  runApp(App());
+}
 
 class Duration {
   final int hours, minutes;
@@ -14,21 +16,13 @@ class Duration {
 
 class ScheduleMath {
   final Duration treatment_time;
-	final int rate;
+	final double rate;
 
   Duration total_time() {
-    if (treatment_time.hours == null)
-      return Duration(9, 9);
 	  var treatment_time_min = treatment_time.hours * 60 + treatment_time.minutes;
-		var total_min = treatment_time_min / rate / 100;
-		var h = (total_min / 60.0).floor();
+		var total_min = treatment_time_min / rate;
+		var h = (treatment_time_min / 60.0).toInt();
 		var m = (total_min - h * 60).toInt();
-
-    if (m >= 60) {
-      h += (m / 60).floor();
-      m -= (((m/60) - (m / 60).floor()) * 60).round();
-    }
-
     return Duration(h, m);
   }
   ScheduleMath(this.treatment_time, this.rate);
@@ -60,7 +54,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -86,7 +79,6 @@ class AppForm extends StatefulWidget {
 class AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
   int hours, minutes, rate;
-  ScheduleMath sched;
 
   Widget _numericInput(String name, Function(String) saveFunc) {
     return TextFormField(
@@ -104,12 +96,14 @@ class AppFormState extends State<AppForm> {
     );
   }
 
+
+
   Widget _submitButton() {
+    var sched = ScheduleMath(Duration(hours, minutes), 0.9);
+
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
-          setState(() => sched = ScheduleMath(Duration(hours, minutes), rate));
-
           _formKey.currentState.save();
 
           Navigator.of(context).push(
@@ -199,19 +193,15 @@ class AppFormState extends State<AppForm> {
           mainAxisAlignment : MainAxisAlignment.spaceEvenly,
           children: [
             Text('Enter Treatment Time', textScaleFactor: 2),
-            //Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            //  _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
-						//])),
+            SizedBox(height: 20),
             Column(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-               children: [
-                SizedBox(height: 30),
                 _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
-                SizedBox(height: 30),
+                Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
+								])),
                 _numericInput("Minutes", (val) => setState(() => minutes = int.parse(val))),
-                SizedBox(height: 30),
                 _numericInput("Rate (%)", (val) => setState(() => rate = int.parse(val))),
-                SizedBox(height: 30),
                 _submitButton()
               ]
             ),
