@@ -12,27 +12,27 @@ class Duration {
   }
 }
 
-class ScheduleMath {
-  final Duration treatment_time;
-	final int rate;
-
-  Duration total_time() {
-    if (treatment_time.hours == null)
-      return Duration(9, 9);
-	  var treatment_time_min = treatment_time.hours * 60 + treatment_time.minutes;
-		var total_min = treatment_time_min / rate;
-		var h = (total_min / 60.0).floor();
-		var m = (total_min - h * 60).floor();
-
-    /* if (m >= 60) { */
-    /*   h += (m / 60).floor(); */
-    /*   m -= (((m/60) - (m / 60).floor()) * 60).round(); */
-    /* } */
-
-    return Duration(h, m);
-  }
-  ScheduleMath(this.treatment_time, this.rate);
-}
+// class ScheduleMath {
+//   final Duration treatment_time;
+// 	final int rate;
+//
+//   Duration total_time() {
+//     if (treatment_time.hours == null)
+//       return Duration(9, 9);
+// 	  var treatment_time_min = treatment_time.hours * 60 + treatment_time.minutes;
+// 		var total_min = treatment_time_min / rate;
+// 		var h = (total_min / 60.0).floor();
+// 		var m = (total_min - h * 60).floor();
+//
+//     /* if (m >= 60) { */
+//     /*   h += (m / 60).floor(); */
+//     /*   m -= (((m/60) - (m / 60).floor()) * 60).round(); */
+//     /* } */
+//
+//     return Duration(h, m);
+//   }
+//   ScheduleMath(this.treatment_time, this.rate);
+// }
 
 class App extends StatelessWidget {
   final _title = 'Productivity';
@@ -86,10 +86,10 @@ class AppForm extends StatefulWidget {
 class AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
   int hours, minutes, rate;
-  ScheduleMath sched;
+  // ScheduleMath sched;
 
   Widget _numericInput(String name, Function(String) saveFunc) {
-    return TextFormField(
+    return new TextFormField(
         decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: name,
@@ -101,8 +101,28 @@ class AppFormState extends State<AppForm> {
           return 'Enter a value';
         return null;
       },
-      onSaved: saveFunc
+      onSaved: saveFunc,
+      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      // onFieldSubmitted: (String value) {
+      //   FocusScope.of(context).nextFocus();
+      // },
     );
+  }
+
+  Widget _resultRow(parts) {
+    return Row(children: [
+      Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+	  		RichText(
+	  		  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
+            TextSpan(text: parts[0]),
+    		    TextSpan(text: parts[1], style: TextStyle(fontStyle: FontStyle.italic)),
+	  			])
+	  		)
+      ])),
+      Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
+        Text(parts[2], textScaleFactor: 1.5),
+      ]))
+    ]);
   }
 
   Widget _formulaRow(parts) {
@@ -120,17 +140,23 @@ class AppFormState extends State<AppForm> {
     ]);
   }
 
+  _formatDecimal(double value) {
+    if (value % 1 == 0) return value.toStringAsFixed(0).toString();
+      return value.toStringAsFixed(2);
+  }
+
   Widget _submitButton() {
     return RaisedButton(
       onPressed: () {
         if (_formKey.currentState.validate()) {
-          setState(() => sched = ScheduleMath(Duration(hours, minutes), rate));
+          //setState(() => sched = ScheduleMath(Duration(hours, minutes), rate));
 
           _formKey.currentState.save();
 
           var tx_min = hours * 60 + minutes;
           var r = rate / 100;
           var total_min = tx_min / r;
+          var total_hour = (tx_min / r) / 60;
           var h = (total_min / 60).floor();
           var m = (total_min - h * 60).floor();
 
@@ -139,79 +165,34 @@ class AppFormState extends State<AppForm> {
               builder: (BuildContext context) {
                 return Scaffold(
                   appBar: AppBar(title: Text("Results")),
-                  body: //Center(child:
+                  body:
                     Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-												//Divider(color: Colors.blue,thickness: 2),
-                        Container(padding: EdgeInsets.all(20), child: Column(children: [
-                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                            Column(children: [Text('Results', textScaleFactor: 2, style: TextStyle(fontStyle: FontStyle.italic))]),
-                          ]),
-                          SizedBox(height: 10),
-                          //Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                          //  Column(children: [Text('T = tx / r', textScaleFactor: 2, style: TextStyle(fontStyle: FontStyle.italic))]),
-                          //]),
-                        ])),
+                        SizedBox(height: 30),
 												Divider(color: Colors.blue, thickness: 2),
                         Container(padding: EdgeInsets.all(25), child:
                           Column(children: [
-                            Row(children: [
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-																RichText(
-																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
-                                    TextSpan(text: 'Treatment '),
-                            		    TextSpan(text: '(tx)', style: TextStyle(fontStyle: FontStyle.italic)),
-																	])
-																)
-                              ])),
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${Duration(hours, minutes)}', textScaleFactor: 1.5),
-                              ]))
-                            ]),
+                            _resultRow(['Treatment', ' (tx)', '${Duration(hours, minutes)}']),
                             SizedBox(height: 30),
-                            Row(children: [
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-																RichText(
-																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
-                                    TextSpan(text: 'Rate '),
-                            		    TextSpan(text: '(r)', style: TextStyle(fontStyle: FontStyle.italic)),
-																	])
-																)
-                              ])),
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('$rate%', textScaleFactor: 1.5)
-                              ]))
-                            ]),
+                            _resultRow(['Rate', ' (r)', '$rate%']),
                             SizedBox(height: 30),
-                            Row(children: [
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-																RichText(
-																  text: TextSpan(style: TextStyle(fontSize: 20.0), children: [
-                                    TextSpan(text: 'Total '),
-                            		    TextSpan(text: '(T)', style: TextStyle(fontStyle: FontStyle.italic)),
-																	])
-																)
-                              ])),
-                              Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${Duration(h, m)}', textScaleFactor: 1.5),
-                              ]))
-                            ]),
+                            _resultRow(['Total', ' (T)', '${Duration(h, m)}']),
                           ]),
                         ),
                         Divider(color: Colors.blue,thickness: 2),
                         Container(padding: EdgeInsets.all(20), child: Column(children: [
-                          //_formulaRow(['treatment', '=', 'rate (total)']),
+                          // _formulaRow(['treatment', '=', 'rate (total)']),
                           _formulaRow(['tx', '=', 'r (T)']),
                           _formulaRow(['r (T)', '=', 'tx']),
                           _formulaRow(['r (T)', '=', '${Duration(hours, minutes)}']),
-                          _formulaRow(['r (T)', '=', '${hours}h * (60m/1h) + ${tx_min}m']),
-                          _formulaRow(['r (T)', '=', '${tx_min}m']),
+                          _formulaRow(['r (T)', '=', '${hours}h * 60m/1h + ${tx_min}m']),
+                          _formulaRow(['r (T)', '=', '${hours * 60}m + ${tx_min}m']),
+                          _formulaRow(['T', '=', '${tx_min}m / r']),
                           _formulaRow(['T', '=', '${tx_min}m / $r']),
-                          _formulaRow(['T', '=', '${total_min.toStringAsFixed(2)}m']),
-                          _formulaRow(['T', '=', '(${total_min.toStringAsFixed(2)}m * (1h/60m))h', '=', '${h}h']),
-                          _formulaRow(['', '=', '(${total_min.toStringAsFixed(2)} - ${h * 60})m',  '=', '${m}m']),
-                          _formulaRow(['r (T)', '=', '${Duration(h, m)}']),
+                          _formulaRow(['T', '=', '${_formatDecimal(total_min)}m']),
+                          _formulaRow(['T', '=', '${_formatDecimal(total_min)}m * 1h/60m', '=', '${_formatDecimal(total_hour)}h']),
+                          _formulaRow(['T', '=', '${h}h, ${_formatDecimal(total_min)}m-${h}*60m/1h']),
+                          _formulaRow(['T', '=', '${Duration(h, m)}']),
                         ])),
 												Divider(color: Colors.blue, thickness: 2),
                     ])
@@ -236,9 +217,6 @@ class AppFormState extends State<AppForm> {
           mainAxisAlignment : MainAxisAlignment.spaceEvenly,
           children: [
             Text('Enter Treatment Time', textScaleFactor: 2),
-            //Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            //  _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
-						//])),
             Column(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
