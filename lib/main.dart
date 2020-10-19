@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 void main() => runApp(App());
 
 class Duration {
-  final int hours, minutes;
+  final double hours, minutes;
   Duration(this.hours, this.minutes);
   @override
   String toString() {
@@ -14,20 +14,21 @@ class Duration {
 
 class ScheduleMath {
   final Duration treatment_time;
-	final int rate;
+	final double rate;
 
   Duration total_time() {
     if (treatment_time.hours == null)
       return Duration(9, 9);
 	  var treatment_time_min = treatment_time.hours * 60 + treatment_time.minutes;
-		var total_min = treatment_time_min / rate / 100;
-		var h = (total_min / 60.0).floor();
-		var m = (total_min - h * 60).toInt();
+		var total_min = treatment_time_min / rate;
+      return Duration(treatment_time_min, rate);
+		var h = (total_min / 60.0);
+		var m = (total_min - h * 60);
 
-    if (m >= 60) {
-      h += (m / 60).floor();
-      m -= (((m/60) - (m / 60).floor()) * 60).round();
-    }
+    /* if (m >= 60) { */
+    /*   h += (m / 60).floor(); */
+    /*   m -= (((m/60) - (m / 60).floor()) * 60).round(); */
+    /* } */
 
     return Duration(h, m);
   }
@@ -85,7 +86,7 @@ class AppForm extends StatefulWidget {
 // https://flutter.dev/docs/cookbook/forms/validation
 class AppFormState extends State<AppForm> {
   final _formKey = GlobalKey<FormState>();
-  int hours, minutes, rate;
+  double hours, minutes, rate;
   ScheduleMath sched;
 
   Widget _numericInput(String name, Function(String) saveFunc) {
@@ -94,7 +95,7 @@ class AppFormState extends State<AppForm> {
         border: OutlineInputBorder(),
         labelText: name,
       ),
-      keyboardType: TextInputType.number,
+      keyboardType: new TextInputType.numberWithOptions(decimal: true),
       validator: (value) {
         if (value.isEmpty)
           return 'Enter a value';
@@ -111,6 +112,12 @@ class AppFormState extends State<AppForm> {
           setState(() => sched = ScheduleMath(Duration(hours, minutes), rate));
 
           _formKey.currentState.save();
+
+          var tx_min = hours * 60 + minutes;
+          var r = rate / 100;
+          var total_min = tx_min / r;
+          var h = (total_min / 60).floor();
+          var m = total_min - h * 60;
 
           Navigator.of(context).push(
             MaterialPageRoute<void>(
@@ -144,7 +151,7 @@ class AppFormState extends State<AppForm> {
 																)
                               ])),
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${sched.treatment_time}', textScaleFactor: 1.5),
+                                Text('${ScheduleMath(Duration(hours, minutes), rate).treatment_time}', textScaleFactor: 1.5),
                               ]))
                             ]),
                             SizedBox(height: 30),
@@ -172,11 +179,34 @@ class AppFormState extends State<AppForm> {
 																)
                               ])),
                               Expanded(flex: 5, child: Column(crossAxisAlignment: CrossAxisAlignment.start, children :[
-                                Text('${sched.total_time()}', textScaleFactor: 1.5),
+                                Text('${ScheduleMath(Duration(hours, minutes), rate).total_time()}', textScaleFactor: 1.5),
                               ]))
                             ]),
                           ]),
-                        )
+                        ),
+                        Divider(color: Colors.blue,thickness: 2),
+                        Container(padding: EdgeInsets.all(20), child: Column(children: [
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('${Duration(hours, minutes)} = ${rate / 100} (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('${tx_min}m = ${r} (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('${tx_min}m / ${r} (T)', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('T = ${total_min}m', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('T = ${h}h ${m}m', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                          SizedBox(height: 10),
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                            Column(children: [Text('T = tx / r', textScaleFactor: 1.5, style: TextStyle(fontStyle: FontStyle.italic))]),
+                          ]),
+                        ])),
+												Divider(color: Colors.blue, thickness: 2),
                     ])
                 );
               },
@@ -206,11 +236,11 @@ class AppFormState extends State<AppForm> {
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
                 SizedBox(height: 30),
-                _numericInput("Hours", (val) => setState(() => hours = int.parse(val))),
+                _numericInput("Hours", (val) => setState(() => hours = double.parse(val))),
                 SizedBox(height: 30),
-                _numericInput("Minutes", (val) => setState(() => minutes = int.parse(val))),
+                _numericInput("Minutes", (val) => setState(() => minutes = double.parse(val))),
                 SizedBox(height: 30),
-                _numericInput("Rate (%)", (val) => setState(() => rate = int.parse(val))),
+                _numericInput("Rate (%)", (val) => setState(() => rate = double.parse(val))),
                 SizedBox(height: 30),
                 _submitButton()
               ]
